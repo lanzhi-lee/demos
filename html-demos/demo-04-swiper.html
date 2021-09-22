@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="zh_CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>swiper demo04</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.0.2/css/swiper.min.css">
+    <style>
+        .swiper-container {
+            width: 900px;
+            height: 500px;
+        }
+
+        #slide-1,
+        #slide-2,
+        #slide-3 {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: #fff;
+        }
+
+        #slide-1 {
+            background-color: #3498DB;
+        }
+
+        #slide-2 {
+            background-color: #E67E22;
+        }
+
+        #slide-3 {
+            background-color: #E74C3C;
+        }
+
+        .custom-prev,
+        .custom-next {
+            width: 42px;
+            height: 42px;
+            border-radius: 50%;
+            transition: 0.2s;
+        }
+
+        .custom-prev:hover,
+        .custom-next:hover {
+            background-color: rgba(0, 0, 0, 0.2);
+        }
+
+        .custom-prev {
+            background-image: url(data:image/svg+xml;base64,PHN2ZyB0PSIxNTY2NzkyNzk0NTU4IiBjbGFzcz0iaWNvbiIgdmlld0JveD0iMCAwIDEwMjQgMTAyNCIgdmVyc2lvbj0iMS4xIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHAtaWQ9IjI3OTkiIHdpZHRoPSI2NCIgaGVpZ2h0PSI2NCI+PHBhdGggZD0iTTc3Mi45MzA5NTQgNDAuNjQ0OTIzTDMwMS41NzU4NzcgNTEybDQ3MS4zNTUwNzcgNDcxLjM1NTA3N2EyMy44MDkzMTMgMjMuODA5MzEzIDAgMCAxLTMzLjY3MTIyMSAzMy42NzEyMkwyNTEuMDY5MDQ2IDUyOC44MzU2MWEyMy44MDkzMTMgMjMuODA5MzEzIDAgMCAxIDAtMzMuNjcxMjJMNzM5LjI1OTczMyA2Ljk3MzcwM2EyMy44MDkzMTMgMjMuODA5MzEzIDAgMCAxIDMzLjY3MTIyMSAzMy42NzEyMnoiIHAtaWQ9IjI4MDAiIGZpbGw9IiNmZmZmZmYiLz48L3N2Zz4=);
+        }
+
+        .custom-next {
+            background-image: url(data:image/svg+xml;base64,PHN2ZyB0PSIxNTY2NzkyNzU0NDQ5IiBjbGFzcz0iaWNvbiIgdmlld0JveD0iMCAwIDEwMjQgMTAyNCIgdmVyc2lvbj0iMS4xIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHAtaWQ9IjI2MzIiIHdpZHRoPSI2NCIgaGVpZ2h0PSI2NCI+PHBhdGggZD0iTTI1MS4wNjkwNDYgOTgzLjM1NTA3N2w0NzEuMzU1MDc3LTQ3MS4zNTUwNzdMMjUxLjA2OTA0NiA0MC42NDQ5MjNBMjMuODA5MzEzIDIzLjgwOTMxMyAwIDAgMSAyODQuNzQwMjY3IDYuOTczNzAzbDQ4OC4xOTA2ODcgNDg4LjE5MDY4N2EyMy44MDkzMTMgMjMuODA5MzEzIDAgMCAxIDAgMzMuNjcxMjJMMjg0Ljc0MDI2NyAxMDE3LjAyNjI5N0EyMy44MDkzMTMgMjMuODA5MzEzIDAgMCAxIDI1MS4wNjkwNDYgOTgzLjM1NTA3N3oiIHAtaWQ9IjI2MzMiIGZpbGw9IiNmZmZmZmYiLz48L3N2Zz4=)
+        }
+
+
+        .swiper-scrollbar {
+            width: 90px;
+            background-color: #c6e4f5;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="swiper-container">
+        <div class="swiper-wrapper">
+            <div class="swiper-slide" id="slide-1">Slide 1</div>
+            <div class="swiper-slide" id="slide-2">Slide 2</div>
+            <div class="swiper-slide" id="slide-3">Slide 3</div>
+        </div>
+        <!-- 如果需要分页器 分页器指的是页面右侧的几个圆点 用来指示当前页（垂直） -->
+        <!-- <div class="swiper-pagination"></div> -->
+
+
+        <!-- 如果需要导航按钮 导航按钮指的是swiper左右两侧的上/下一页按钮 -->
+        <div class="swiper-button-prev custom-prev"></div>
+        <div class="swiper-button-next custom-next"></div>
+
+        <!-- 如果需要滚动条 -->
+        <div class="swiper-scrollbar"></div>
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.0.2/js/swiper.min.js"></script>
+    <script>
+        var mySwiper = new Swiper('.swiper-container', {
+            loop: true, // 循环模式选项
+
+            // 如果需要前进后退按钮 对应导航按钮
+            navigation: {
+                nextEl: '.swiper-button-next',
+                prevEl: '.swiper-button-prev',
+            },
+
+            // 如果需要滚动条 对应滚动条
+            scrollbar: {
+                el: '.swiper-scrollbar',
+                dragSize: 30,
+            },
+        })
+
+      console.log(mySwiper.scrollbar.updateSize())  
+    </script>
+</body>
+
+</html>

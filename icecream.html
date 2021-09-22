@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Ice Cream</title>
+    <style>
+      body,
+      html {
+        margin: 0;
+        padding: 0;
+        height: 100%;
+      }
+      /* 背景容器 */
+      .container {
+        height: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: #33485f;
+      }
+
+      /* 奶油 */
+      .cream {
+        position: relative;
+        width: 190px;
+        height: 260px;
+        border-radius: 80px 80px 10px 10px;
+        overflow: hidden;
+      }
+
+      /* 奶油左侧点缀 */
+      .cream:after {
+        content: '';
+        position: absolute;
+        left: 21px;
+        bottom: 20px;
+        width: 20px;
+        height: 170px;
+        border-radius: 50px;
+        background: rgba(255, 255, 255, 0.5);
+      }
+
+      /* 木棍 */
+      .stick {
+        width: 57px;
+        height: 86px;
+        background: #e09c5f;
+        border-radius: 0 0 25px 25px;
+        display: block;
+        margin: 0 auto;
+      }
+
+      /* 木棍点缀 */
+      .stick:before {
+        display: block;
+        content: '';
+        width: 100%;
+        height: 24px;
+        background: #8d613b;
+      }
+
+      /* 纹路 */
+      .texture {
+        position: relative;
+        top: 0%;
+        left: -40%;
+        width: 180%;
+        height: 120%;
+
+        background-image: repeating-linear-gradient(#30dcf6 0%, #30dcf6 25%, #f2d200 25%, #f2d200 50%);
+
+        /* animation: flavours 100s linear infinite; */
+        transform: rotate(155deg);
+      }
+
+      @keyframes flavours {
+        to {
+          background-position: 0 -1000vh;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="icecream">
+        <div class="cream">
+          <div class="texture"></div>
+        </div>
+        <div class="stick"></div>
+      </div>
+    </div>
+  </body>
+</html>

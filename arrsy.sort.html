@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      var data = [
+        { id: 1, no_left: false, sold_out: false },
+        { id: 4, no_left: true, sold_out: false },
+        { id: 2, no_left: false, sold_out: false },
+        { id: 5, no_left: false, sold_out: true },
+        { id: 3, no_left: false, sold_out: false },
+      ]
+
+      /**
+        { id: 1, no_left: false, sold_out: false },
+        { id: 4, no_left: true, sold_out: false },
+
+        { id: 1, no_left: false, sold_out: false },
+        { id: 4, no_left: true, sold_out: false },
+        { id: 2, no_left: false, sold_out: false },
+        { id: 5, no_left: false, sold_out: true },
+        { id: 3, no_left: false, sold_out: false },
+
+        { id: 4, no_left: true, sold_out: false },
+        { id: 2, no_left: false, sold_out: false }, 交换
+
+        { id: 1, no_left: false, sold_out: false },
+        { id: 2, no_left: false, sold_out: false },
+        { id: 4, no_left: true, sold_out: false },
+        { id: 5, no_left: false, sold_out: true },
+        { id: 3, no_left: false, sold_out: false },
+
+       */
+       var data = [
+        { id: 1, no_left: false, sold_out: false },
+        { id: 5, no_left: false, sold_out: true },
+        { id: 2, no_left: false, sold_out: false },
+        { id: 4, no_left: true, sold_out: false },
+        { id: 3, no_left: false, sold_out: false },
+      ]
+
+      data.sort((first, second) => {
+        console.log(first, second)
+        if (first.sold_out || first.no_left) {
+          if (second.sold_out || second.no_left) return 0 // 
+          else return -1
+        } else return 1
+      })
+    </script>
+  </body>
+</html>

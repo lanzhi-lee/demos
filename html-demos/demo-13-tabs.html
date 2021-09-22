@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html>
+
+<head lang="en">
+  <meta charset="UTF-8">
+  <title>JavaScript原生代码 - 选项卡跳转</title>
+  <style type="text/css">
+    * {
+      padding: 0;
+      margin: 0
+    }
+
+    #tabs {
+      width: 450px;
+      padding: 5px;
+      margin: 20px;
+    }
+
+    #tabs ul {
+      list-style: none;
+      display: block;
+      height: 30px;
+      line-height: 30px;
+      border-bottom: 2px #fd9c15 solid;
+    }
+
+    #tabs ul li {
+      background: #fff;
+      cursor: pointer;
+      float: left;
+      list-style: none;
+      height: 28px;
+      line-height: 28px;
+      margin: 0 3px;
+      border: 1px solid #fd9c15;
+      border-bottom: none;
+      display: inline-block;
+      width: 60px;
+      text-align: center;
+    }
+
+    #tabs ul li.on {
+      border: 2px solid #fd9c15;
+      border-bottom: 2px solid #fff;
+      font-size: 20px
+    }
+
+    #tabs div {
+      height: 200px;
+      line-height: 25px;
+      border: 2px solid #fd9c15;
+      border-top: none;
+      padding: 5px;
+    }
+
+    .hide {
+      display: none;
+    }
+  </style>
+  <script type="text/javascript">
+    window.onload = function () {
+      var oTabs = document.getElementById("tabs");
+      var oUl = oTabs.getElementsByTagName("ul")[0];
+      var oLis = oUl.getElementsByTagName("li");
+      var oDivs = oTabs.getElementsByTagName("div");
+
+      for (var i = 0, len = oLis.length; i < len; i++) {
+        oLis[i].index = i;
+        oLis[i].onclick = function () {
+          for (var n = 0; n < len; n++) {
+            oLis[n].className = "";
+            oDivs[n].className = "hide";
+          }
+          this.className = "on";
+          oDivs[this.index].className = "";
+        }
+      }
+    }
+  </script>
+
+</head>
+
+<body>
+  <div id="tabs">
+    <ul>
+      <li class="on">关雎</li>
+      <li>蒹葭</li>
+      <li>采薇</li>
+    </ul>
+    <div>
+      关关雎鸠， 在河之洲。 窈窕淑女， 君子好逑。<br>
+      参差荇菜， 左右流之。 窈窕淑女， 寤寐求之。<br>
+      求之不得， 寤寐思服。 悠哉悠哉， 辗转反侧。<br>
+      参差荇菜， 左右采之。 窈窕淑女， 琴瑟友之。<br>
+      参差荇菜， 左右芼之。 窈窕淑女， 钟鼓乐之。<br>
+    </div>
+    <div class="hide">
+      蒹葭苍苍， 白露为霜。 所谓伊人， 在水一方。 <br>
+      溯洄从之， 道阻且长。 溯游从之， 宛在水中央。<br>
+      蒹葭萋萋， 白露未晞。 所谓伊人， 在水之湄。 <br>
+      溯洄从之， 道阻且跻。 溯游从之， 宛在水中坻。<br>
+      蒹葭采采， 白露未已。 所谓伊人， 在水之涘。<br>
+      溯洄从之， 道阻且右。 溯游从之， 宛在水中沚。<br>
+
+    </div>
+    <div class="hide">
+      昔我往矣， 杨柳依依。<br>
+      今我来思， 雨雪霏霏。<br>
+      行道迟迟， 载渴载饥。<br>
+      我心伤悲， 莫知我哀！<br>
+
+    </div>
+  </div>
+
+</body>
+
+</html>

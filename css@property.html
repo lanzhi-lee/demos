@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>css@property</title>
+    <style>
+      /* @property --colorA {
+        syntax: '<color>';
+        inherits: false;
+        initial-value: #fff;
+      }
+      @property --colorB {
+        syntax: '<color>';
+        inherits: false;
+        initial-value: #000;
+      }
+
+      #demo {
+        width: 200px;
+        height: 200px;
+        background-image: linear-gradient(45deg, var(--colorA), var(--colorB));
+        transition: 1s --colorA, 1s --colorB;
+      }
+
+      #demo:hover {
+        background-color: red;
+        --colorA: yellowgreen;
+        --colorB: deeppink;
+      } */
+      
+      #demo{
+        width: 632px;
+        height: 340px;
+        /* background: linear-gradient(45deg, #fff, #000); */
+        background: url('https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/b30177d629bfbe2fb42251c1b8538f7b.jpg?w=632&h=340');
+        transition: all linear 0.3s;
+      }
+      #demo:hover {
+        /* background: linear-gradient(45deg, yellowgreen, deeppink); */
+        background: url('https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/793913688bfaee26b755a0b0cc8575fd.jpg?w=632&h=340');
+        /* height: 400px; */
+      } 
+    </style>
+  </head>
+  <body>
+    <div id="demo"></div>
+  </body>
+</html>

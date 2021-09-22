@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      const goUrl = 'https://www.baidu.com'
+      const wakeUrl = {
+        wakeAndroid: 'globalshop://mobile.mi.com?nativeOpenUrl=' + goUrl,
+        wakeIOS: 'globalshop://mobile.mi.com?nativeOpenSource=1&url=' + goUrl,
+      }
+
+      function wakeApp() {
+        const { wakeAndroid, wakeIOS } = wakeUrl
+
+        const isIOS = !!navigator.userAgent.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/)
+        const isChrome = navigator.userAgent.includes('Chrome')
+
+        const callUrl = isIOS ? wakeIOS : wakeAndroid
+
+        const iframe = document.createElement('iframe')
+        iframe.style.cssText = 'display:none; width=0; height=0'
+        document.body.appendChild(iframe)
+        iframe.src = callUrl
+
+        // if (isChrome || isIOS) {
+        //   // if (isIOS) {
+        //   // 使用location唤起
+        //   window.location.href = callUrl
+        // } else {
+        //   // 使用iframe唤起app
+        //   const iframe = document.createElement('iframe')
+        //   iframe.style.cssText = 'display:none; width=0; height=0'
+        //   document.body.appendChild(iframe)
+        //   iframe.src = callUrl
+        // }
+      }
+      wakeApp()
+    </script>
+  </body>
+</html>

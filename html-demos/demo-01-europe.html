@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>EUROPE</title>
+    <style>
+        .contrast__background {
+            /* background-image: url('http://i01.appmifile.com/webfile/globalimg/eu-img-contrast/bg-fr.png'); */
+            background-image: url('http://i01.appmifile.com/webfile/globalimg/eu-img-contrast/bg-it.png');
+            /* background-image: url('http://i01.appmifile.com/webfile/globalimg/eu-img-contrast/bg-es.png'); */
+            /* background-image: url('http://i01.appmifile.com/webfile/globalimg/eu-img-contrast/bg-fr.png'); */
+            /* background-image: url('http://i01.appmifile.com/webfile/globalimg/eu-img-contrast/bg-fr.png'); */
+        }
+
+        .contrast-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 675px;
+            background-color: #000;
+
+            /* 意大利专用： */
+            background-color: #150101;
+        }
+
+        .contrast__background,
+        .contrast__background-frame {
+            background-repeat: no-repeat;
+        }
+
+        .contrast__background {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 1226px;
+            height: 675px;
+            box-sizing: border-box;
+            padding-top: 196px;
+            padding-bottom: 94px;
+
+            background-size: 1226px 675px;
+            background-color: #333137;
+        }
+
+        .contrast__background-frame {
+            width: 806px;
+            height: 385px;
+            background-size: 806px 385px;
+            background-image: url('http://i01.appmifile.com/webfile/globalimg/eu-img-contrast/background-frame-2.png');
+        }
+
+        .contrast__bg-img,
+        .contrast__move-img {
+            display: inline-block;
+            height: 385px;
+            background-repeat: no-repeat;
+            background-position-x: -17px;
+        }
+
+        .contrast__bg-img {
+            width: 765px;
+            margin-left: 17px;
+            margin-right: 24px;
+            overflow: hidden;
+            background-image: url('http://i01.appmifile.com/webfile/globalimg/eu-img-contrast/screen-h.png');
+        }
+
+        .contrast__move-img {
+            width: 403px;
+            background-image: url('http://i01.appmifile.com/webfile/globalimg/eu-img-contrast/screen-mask.png');
+        }
+
+        .contrast__slider {
+            display: flex;
+            width: 0;
+            height: 385px;
+            cursor: move;
+            position: relative;
+            left: 403px;
+        }
+
+        .contrast__slider:after {
+            content: " ";
+            display: block;
+            width: 54px;
+            height: 24px;
+            border-radius: 50%;
+
+            position: absolute;
+            top: 50%;
+            left: 50%;
+
+            margin-left: -27px;
+            margin-top: -20px;
+
+            background: url('https://i01.appmifile.com/webfile/globalimg/eu-img-contrast/slider-h.png') no-repeat;
+            background-size: cover;
+        }
+    </style>
+
+</head>
+
+<body>
+    <div class="contrast-container">
+        <div class="contrast__background">
+            <div class="contrast__background-frame">
+                <div class="contrast__bg-img">
+                    <div class="contrast__move-img">
+                        <span>
+                            <span class="contrast__slider"></span>
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+<script>
+    (function () {
+        'use strict'
+
+        var slider = document.querySelector('.contrast__slider')
+        var bg_img = document.querySelector('.contrast__bg-img')
+        var move_img = document.querySelector('.contrast__move-img')
+
+        function sliderCallback(event) {
+            var event = window.event || event;
+            var clientX = event.pageX
+            var offsetLeft = bg_img.offsetLeft
+
+            var offset = clientX - offsetLeft - 1
+
+            if (offset < -1 || offset > 800) return
+
+            move_img.style.width = offset + 'px'
+            slider.style.left = offset + 'px'
+        }
+
+        // 鼠标点击滑动条是开启监听
+        slider.addEventListener('mousedown', function () {
+            // 滑动条跟随鼠标拖动
+            bg_img.addEventListener('mousemove', sliderCallback)
+        })
+
+        // 鼠标松开移除监听
+        slider.addEventListener('mouseup', function () {
+            bg_img.removeEventListener('mousemove', sliderCallback, false)
+        })
+
+        // 鼠标移出图片区域移出监听
+        bg_img.addEventListener('mouseleave', function () {
+            bg_img.removeEventListener('mousemove', sliderCallback, false)
+        })
+    })()
+</script>
+
+</html>

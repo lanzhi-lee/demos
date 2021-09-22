@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>::after</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+      }
+      .container,
+      .inner,
+      .inner-ul {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+      .container {
+        width: 600px;
+        height: 300px;
+        background-color: pink;
+      }
+      .inner {
+        width: 100px;
+        height: 100px;
+        background-color: deeppink;
+      }
+
+      .container [data-edit],
+      .inner [data-edit] {
+        background-color: yellowgreen;
+      }
+
+      .inner[data-edit]::after {
+        display: inline-block;
+        content: ' ';
+        width: 30px;
+        height: 30px;
+        background-color: yellow;
+      }
+
+      .inner[data-edit1] ::after {
+        display: inline-block;
+        content: ' ';
+        width: 30px;
+        height: 30px;
+        background-color: yellowgreen;
+      }
+
+      .inner-ul {
+        background-color: yellowgreen;
+      }
+      .inner-ul li {
+        list-style: none;
+        width: 20px;
+        height: 20px;
+        text-align: center;
+      }
+      .inner-ul li:first-child {
+        color: red;
+      }
+
+      .inner-ul :last-child {
+        color: red;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="inner" data-edit="true">
+        <!-- <span></span> -->
+      </div>
+      <div class="inner" data-edit1="true">
+        <span></span>
+      </div>
+
+      <ul class="inner inner-ul">
+        <li>1</li>
+        <li>2</li>
+        <li>3</li>
+      </ul>
+    </div>
+  </body>
+</html>

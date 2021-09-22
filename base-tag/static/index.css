@@ -1,0 +1,8 @@
+@font-face {
+  font-family: Demo;
+  src: url('./base.ttf') format('truetype');
+}
+
+* {
+  font-family: Demo;
+}

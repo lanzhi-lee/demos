@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>canvas生成海报</title>
+  </head>
+  <body>
+    <canvas id="main-canvas" width="572" height="379"></canvas>
+
+    <input type="file" name="image" id="uploadFile" style="display: none;" />
+    <input type="hidden" name="img" />
+    <button type="button" class="beatiful" id="uploadBtn">上传图片</button>
+    <div><img src="" class="img-show" /></div>
+  </body>
+  <script>
+    const canvas = document.querySelector('#main-canvas')
+    const ctx = canvas.getContext('2d')
+
+    const img = new Image()
+    img.src = './imgs/14/leijun.png'
+    img.onload = () => {
+      ctx.drawImage(img, 0, 0)
+
+      ctx.fillStyle = '#fff'
+      ctx.font = '48px serif'
+      ctx.fillText('Hello world', 10, 50)
+    }
+
+    document.querySelector('#uploadBtn').addEventListener('click', () => {
+      const ipt = document.querySelector('#uploadFile')
+      ipt.click()
+
+      //当图片选中后，会触发name=file文本的change事件
+      ipt.addEventListener('change', function (event) {
+        // console.log(event)
+        // console.log(this.files)
+
+        // const fileData = new FileReader(this.files[0])
+        // fileData.onload = (event) => {
+        //   console.log(event)
+        // }
+        const uppic = new Image()
+        uppic.src = window.URL.createObjectURL(this.files[0])
+        uppic.onload = () => {
+          ctx.drawImage(uppic, 0, 0)
+        }
+      })
+    })
+  </script>
+</html>

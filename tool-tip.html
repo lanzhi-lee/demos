@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Document</title>
+    <style>
+      body {
+        /* background-color: #000; */
+      }
+      [tooltip] {
+        /* position: relative;
+        display: inline-block;
+        margin: 20px;
+        border: 1px solid #ccc;
+        padding: 4px 6px; */
+
+        position: relative;
+
+        line-height: 1.5;
+        -webkit-font-smoothing: antialiased;
+        font-weight: 400;
+        list-style: none;
+        font-family: Lato, Helvetica Neue, sans-serif;
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-top: 20px;
+        width: 166px;
+        height: 40px;
+        border-radius: 20px;
+        background: #ffc96f;
+        font-size: 20px;
+        color: #fff;
+        cursor: pointer;
+      }
+
+      [tooltip]::before,
+      [tooltip]::after {
+        position: absolute;
+        top: -15px;
+        left: 50%;
+
+        opacity: 0;
+      }
+
+      [tooltip]::before {
+        content: '';
+        border-width: 6px 6px 0 6px;
+        border-style: solid;
+        border-color: transparent;
+        border-top-color: #fff;
+        z-index: 100;
+
+        transform: translateX(-50%);
+      }
+
+      [tooltip]::after {
+        content: attr(tooltip);
+        min-width: 114px;
+        padding: 13px;
+
+        font-size: 14px;
+        text-align: center;
+        white-space: nowrap;
+        border-radius: 6px;
+        color: #757575;
+        background-color: #fff;
+        box-shadow: 0px 4px 14px 0px rgba(0, 0, 0, 0.1);
+        pointer-events: none;
+        z-index: 99;
+
+        transform: translateX(-50%) translateY(-100%);
+      }
+
+      [tooltip]:hover::after,
+      [tooltip]:hover::before {
+        opacity: 1;
+        transition: 0.5s;
+      }
+
+      /* 右侧 */
+      [tooltip][position='right']::before {
+        top: 50%;
+        left: 100%;
+        margin-left: 6px;
+        transform: translateY(-50%) rotate(90deg);
+      }
+      [tooltip][position='right']::after {
+        top: 50%;
+        left: 100%;
+        margin-left: 15px;
+        transform: translateY(-50%);
+      }
+
+      /* 左侧 */
+      [tooltip][position='left']::before {
+        top: 50%;
+        left: 0;
+        margin-left: -18px;
+        transform: translateY(-50%) rotate(-90deg);
+      }
+      [tooltip][position='left']::after {
+        top: 50%;
+        left: 0;
+        margin-left: -15px;
+        transform: translateY(-50%) translateX(-100%);
+      }
+
+      /* 底侧 */
+      [tooltip][position='bottom']::before {
+        top: 100%;
+        left: 50%;
+        margin-top: 9px;
+        transform: translatex(-50%) rotate(180deg);
+      }
+      [tooltip][position='bottom']::after {
+        top: 100%;
+        left: 50%;
+        margin-top: 15px;
+        transform: translatex(-50%);
+      }
+    </style>
+  </head>
+  <body>
+    <div style="margin: 160px">
+      <div tooltip="love you">hover</div>
+      <br />
+      <div tooltip="love you" position="left">hover left</div>
+      <br />
+      <div tooltip="love you" position="right">hover right</div>
+      <br />
+      <div tooltip="love you" position="bottom">hover bottom</div>
+    </div>
+  </body>
+</html>
+
+<!-- <!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Tool Tip</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+      }
+      html,
+      body,
+      .container {
+        width: 100%;
+        height: 100%;
+      }
+      .container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+      .self-btn {
+        line-height: 1.5;
+        -webkit-font-smoothing: antialiased;
+        font-weight: 400;
+        list-style: none;
+        font-family: Lato, Helvetica Neue, sans-serif;
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-top: 20px;
+        width: 166px;
+        height: 40px;
+        border-radius: 20px;
+        background: #ffc96f;
+        font-size: 20px;
+        color: #fff;
+        cursor: pointer;
+      }
+
+      /* .self-btn::before{
+        content: ' ';
+        display: inline-block;
+        64 29 
+        height: ;
+      } */
+
+      .btn {
+        position: relative;
+
+        display: block;
+        margin: 100px auto;
+        padding: 10px;
+        font-size: 14px;
+        background: #fff;
+        color: green;
+        border: 1px solid green;
+        cursor: pointer;
+      }
+      [tip]:after {
+        content: attr(tip);
+        visibility: hidden;
+        /* 实现垂直居中 */
+        position: absolute;
+        top: 50%;
+        transform: translate(-5px, -50%);
+        transition: all 0.3s;
+
+        left: 100%;
+        opacity: 0;
+
+        /* 空白问题 */
+        white-space: pre;
+        font-size: 16px;
+        padding: 5px 10px;
+        background-color: rgba(18, 26, 44, 0.8);
+        color: #fff;
+        box-shadow: 1px 1px 14px rgba(0, 0, 0, 0.1);
+      }
+      [tip]:hover {
+        /* ie兼容 */
+        overflow: visible;
+      }
+      .btn:hover::after {
+        opacity: 0.8;
+        transition: all 0.3s;
+        transform: translate(5px, -50%);
+        visibility: visible;
+        display: block;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <span class="self-btn">click me</span>
+      <button title="tips">button</button>
+
+      <button class="btn" tip="a bcdef">鼠标移动到这</button>
+    </div>
+  </body>
+  <script src="https://cdn.bootcdn.net/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+  <script>
+    window.addEventListener('DOMContentLoaded', () => {
+      const $btn = $('.self-btn')
+
+      console.log($btn)
+    })
+  </script>
+</html> -->

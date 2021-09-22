@@ -1,0 +1,116 @@
+html,
+body {
+  cursor: none !important;
+  height: 100%;
+  width: 100%;
+  overflow: hidden;
+}
+body {
+  overflow: auto;
+}
+
+.cursor__block {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  cursor: none !important;
+
+  .cursor__container {
+    box-sizing: border-box;
+    width: 100%;
+    height: 100%;
+    background-color: #000;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .cursor__wrap {
+    &--play {
+      width: 400px;
+      height: 200px;
+      background-color: #999;
+      margin-right: 50px;
+    }
+  }
+
+  .root-cursor {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    pointer-events: none;
+    .cursor__point {
+      position: fixed;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      left: 0;
+      cursor: none !important;
+      &__block {
+        width: 0;
+        height: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        position: relative;
+        transform: translate(var(--mouse-x), var(--mouse-y));
+      }
+      &__section {
+        opacity: 0;
+        transition: transform 0.5s, opacity 0.3s;
+        transform: rotate(180deg) scale(5) translate(10%, 10%);
+        transform-origin: 66% 66%;
+      }
+
+      &__section[data-visible='true'] {
+        opacity: 1;
+        transform: none;
+      }
+
+      &__section--expand {
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        overflow: hidden;
+        clip-path: circle(50% at 50% 50%);
+      }
+      &__section--default {
+        position: relative;
+        z-index: 1;
+        transition: transform 0.3s;
+        transform-origin: 66% 66%;
+      }
+      &__section--expand[data-expanded='true'] .cursor__point__section--default {
+        transform: scale(12) rotate(180deg);
+      }
+      &__section--custom {
+        position: absolute;
+        width: 0;
+        height: 0;
+        color: #fff;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        opacity: 0;
+        z-index: 2;
+        transition: opacity 0.3s;
+        > div {
+          transform: translate(2px, 3px);
+          > svg {
+            color: #fff;
+          }
+        }
+      }
+      &__section--expand[data-expanded='true'] .cursor__point__section--custom {
+        opacity: 1;
+      }
+    }
+  }
+
+
+}

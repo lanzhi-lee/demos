@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Radial Gradient Background</title>
+    <style>
+      html,
+      body,
+      .container {
+        width: 100%;
+        height: 100%;
+        margin: 0;
+        padding: 0;
+        color: rgb(237, 210, 151);
+      }
+      .container {
+        display: flex;
+        justify-content: center;
+        align-items: flex-start;
+
+        background-color: #000;
+        /* background-image: radial-gradient(rgb(237, 210, 151, 0.3), rgb(237, 210, 151, 0.1)); */
+      }
+      .box {
+        width: 100%;
+        height: 40%;
+
+        background-image: radial-gradient(rgb(237, 210, 151, 0.3), transparent 50%, transparent 100%);
+        background-repeat: no-repeat;
+        background-position: center -80%;
+        /* opacity: 0.8; */
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="container">
+      <div class="box"></div>
+    </div>
+  </body>
+</html>

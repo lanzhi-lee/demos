@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Css Event</title>
+
+    <style>
+      .container * {
+        pointer-events: none;
+      }
+      .container .special {
+        pointer-events: auto;
+      }
+
+      .container {
+        display: flex;
+      }
+      .normal,
+      .special {
+        display: inline-block;
+        width: 50px;
+        height: 50px;
+      }
+      .normal {
+      }
+      .special {
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="container">
+      <div class="normal" onclick="handleClick(event);">1</div>
+      <div class="normal" onclick="handleClick(event);">2</div>
+      <div class="normal">
+        <span class="normal" onclick="handleClick(event);">3</span>
+        <span class="special" data-type="btn" onclick="handleClick(event);">4</span>
+      </div>
+    </div>
+  </body>
+  <script>
+    function handleClick(event) {
+      console.log(event.target)
+    }
+  </script>
+</html>

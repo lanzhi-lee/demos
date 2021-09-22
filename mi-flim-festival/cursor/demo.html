@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Mouse Follow</title>
+    <style>
+      html,
+      body {
+        width: 100%;
+        height: 100%;
+        margin: 0;
+        padding: 0;
+      }
+      .mouse {
+        position: absolute;
+        top: 0;
+        left: 0;
+
+        width: 50px;
+        height: 50px;
+        background-color: pink;
+        border-radius: 5px;
+        transform-origin: center;
+        transition: transform 100ms;
+        cursor: none;
+      }
+      .container {
+        width: 500px;
+        height: 300px;
+        background-color: #333;
+        cursor: none;
+
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container"></div>
+    <div class="mouse"></div>
+  </body>
+  <script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.6.0/jquery.slim.js"></script>
+  <script>
+    const $mouse = $('.mouse')
+
+    $('.container').on('mousemove', (event) => {
+      // console.log(event)
+      const { clientX, clientY } = event
+      $mouse.css('transform', `translate(${clientX - 25}px, ${clientY - 25}px)`)
+    })
+
+    // window.addEventListener('mousemove', (event) => {
+    //   console.log(event)
+    //   const { clientX, clientY } = event
+    //   // transform: translate(10px, 10px);
+    //   $mouse.css('transform', `translate(${clientX - 25}px, ${clientY - 25}px)`)
+    // })
+  </script>
+</html>

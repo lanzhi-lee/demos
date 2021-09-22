@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>circle-countdown</title>
+    <style>
+      body {
+        --dura: 30s;
+        --size: 200px;
+        background-color: black;
+      }
+      .box {
+        /* 最外层的盒子 */
+        width: var(--size);
+        height: var(--size);
+        margin: 0 auto;
+        position: relative;
+        overflow: hidden;
+        border-radius: 50%;
+        background-color: #fff;
+      }
+      .left_box,
+      .right_box {
+        /* 
+        左右两边用于 隐藏 旋转的div的盒子 
+        通过overflow来隐藏内部div旋转出去的部分
+        */
+        position: absolute;
+        top: 0;
+        width: calc(var(--size) / 2);
+        height: var(--size);
+        overflow: hidden;
+        z-index: 1;
+      }
+      .left_box {
+        left: 0;
+      }
+      .right_box {
+        right: 0;
+      }
+      .left_item,
+      .right_item {
+        /* 
+        这是需要旋转的div(没有被mask遮盖展示出来的部分作为倒计时的线条)
+        为了方便理解，下面用deeppink和cyan分别设置了左右两边div的颜色
+        */
+        width: calc(var(--size) / 2);
+        height: var(--size);
+      }
+      .left_item {
+        /*
+        1.设置圆角，圆角大小为高度的一半
+        2.这只旋转的中心店，这是左边圆，中心点设置到右边中心点，右边圆则设置到左边中心点
+        */
+        border-top-left-radius: calc(var(--size) / 2);
+        border-bottom-left-radius: calc(var(--size) / 2);
+        transform-origin: right center;
+        /* animation: loading_left var(--dura) linear; */
+        animation: loading_left linear;
+        animation-play-state: paused;
+        background-color: blue;
+      }
+      .right_item {
+        border-top-right-radius: calc(var(--size) / 2);
+        border-bottom-right-radius: calc(var(--size) / 2);
+        transform-origin: left center;
+        /* animation: loading_right var(--dura) linear; */
+        animation: loading_right linear;
+        animation-play-state: paused;
+        background-color: blue;
+      }
+      .mask {
+        /* 遮住div多余的部分，呈现出线条的效果 */
+        position: absolute;
+        top: 10px;
+        left: 10px;
+        right: 10px;
+        bottom: 10px;
+        z-index: 2;
+        border-radius: 50%;
+        background-color: #fff;
+      }
+      @keyframes loading_left {
+        0%,
+        50% {
+          transform: rotate(0deg);
+        }
+        100% {
+          transform: rotate(180deg);
+        }
+      }
+      @keyframes loading_right {
+        0% {
+          transform: rotate(0deg);
+        }
+        50%,
+        100% {
+          transform: rotate(180deg);
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="box">
+      <div class="left_box">
+        <div class="left_item rotate_item"></div>
+      </div>
+      <div class="right_box">
+        <div class="right_item rotate_item"></div>
+      </div>
+      <div class="mask"></div>
+    </div>
+  </body>
+  <script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script>
+    const $playItem = $('.rotate_item')
+    $(document).ready(() => {
+      setTimeout(() => {
+        console.log('start')
+        $playItem.css('animation-duration', '6s').css('animation-play-state', 'running')
+      }, 3000)
+    })
+  </script>
+</html>

@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+	<title>Examples</title>
+	<meta content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0,user-scalable=no"
+		name="viewport" />
+	<meta name="description" content="">
+	<meta name="keywords" content="">
+	<link href="" rel="stylesheet">
+</head>
+
+<style>
+	* {
+		margin: 0px;
+		padding: 0px;
+	}
+
+	.leaves {
+		width: 80px;
+		height: auto;
+		position: absolute;
+		left: 0px;
+		top: -100px;
+	}
+
+	.leaves img {
+		transform-origin: 50% -100%;
+		width: 100%;
+	}
+
+	@keyframes fade {
+		0% {
+			opacity: 1;
+		}
+
+		50% {
+			opacity: 1;
+		}
+
+		100% {
+			opacity: 0;
+		}
+	}
+
+	@keyframes move {
+		0% {
+			transform: translate3d(0px, -50px, 0);
+		}
+
+		100% {
+			transform: translate3d(0px, 650px, 0);
+		}
+	}
+
+	@keyframes rotate {
+		0% {
+			transform: rotate(-50deg);
+		}
+
+		100% {
+			transform: rotate(50deg);
+		}
+	}
+
+	@keyframes rotate1 {
+		0% {
+			transform: scale(-1, 1) rotate(-50deg);
+		}
+
+		100% {
+			transform: scale(-1, 1) rotate(50deg);
+		}
+	}
+</style>
+
+<body>
+</body>
+<script type="text/javascript">
+	(function () {
+		//树叶的总个数
+		var count = 5;
+		//获取随机数
+		function Random(s, e) {
+			return Math.random() * (e - s) + s;
+		};
+
+		var fragment = document.createDocumentFragment();
+		for (var i = 0; i < count; i++) {
+			var div = document.createElement("div");
+			div.className = 'leaves';
+			div.innerHTML = '<img src="./img/10/img' + (Math.round(Random(1, 3))) + '.png" alt="">';
+			fragment.appendChild(div);
+		};
+		//添加到body里
+		document.body.appendChild(fragment);
+		//给每个树叶添加animation动画，并设置随机的参数
+		var leaves = document.querySelectorAll('.leaves');
+		[].forEach.call(leaves, function (o, i) {
+			console.log(o, i);
+
+			var time1 = Random(5, 10); //树叶总共落下的时间
+			var time2 = Random(1, 3); //每个树叶的延时时间
+			var time3 = Random(3, 6); //每个树叶的摇摆的时间
+			//随机设置left，根据浏览器宽度设置最大值
+			o.style.left = Random(-30, document.documentElement.clientWidth) + 'px';
+			//设置animation属性，为了兼容添加了前缀，总共时间和延时时间随机获取
+			o.style.animation = 'fade ' + time1 + 's ' + time2 + 's linear infinite,move ' + time1 + 's ' +
+				time2 + 's linear infinite';
+			//设置里面图片的animation属性，设置时间，并设置翻转
+			o.children[0].style.animation = Math.round(Random(0, 1)) ?
+				'rotate ' + time3 + 's ease-in-out infinite alternate' :
+				'rotate1 ' + time3 + 's ease-in-out infinite alternate';
+		})
+	})();
+</script>
+
+</html>

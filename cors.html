@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>CORS</title>
+  </head>
+  <body>
+    <h1>cors demo</h1>
+    <button onclick="handleInsertClick();">handleInsertClick</button>
+    <button onclick="handleUpdateClick();">handleUpdateClick</button>
+  </body>
+  <script src="https://cdn.bootcdn.net/ajax/libs/axios/0.21.0/axios.min.js"></script>
+  <script>
+    function handleInsertClick() {
+      // axios
+      //   .post('http://localhost:9898/default', {
+      //     key: 22222,
+      //   })
+      //   .then((res) => {
+      //     console.log(res.data)
+      //   })
+
+      const config = {
+        // id: String, // 页面ID
+        title: '页面1', // 页面标题
+        path: 'demo_page', // 页面路径
+        page_title: '超快乐抽奖',
+        page_desc: '超快乐抽奖dee描述',
+        start_time: new Date('2020.11.10 00:00:00 GMT+08:00').getTime(),
+        end_time: new Date('2020.11.11 23:59:00 GMT+08:00').getTime(),
+        prize: [
+          {
+            name: '吃饭',
+            rate: 0.4,
+            quantity: 40,
+          },
+          {
+            name: '睡觉',
+            rate: 0.6,
+            quantity: 60,
+          },
+        ],
+      }
+
+      // axios({
+      //   url: 'http://localhost:9898/default',
+      //   method: 'POST',
+      //   data: {
+      //     key: 22222,
+      //   },
+      // }).then((res) => {
+      axios({
+        url: 'http://localhost:9898/event/add',
+        method: 'POST',
+        data: { config },
+      }).then((res) => {
+        console.log(res.data)
+      })
+    }
+
+    function handleUpdateClick() {
+      const config = {
+        title: '简单页面6', // 页面标题
+        path: 'demo_page', // 页面路径
+        page_title: '超快乐抽奖',
+        page_desc: '超快乐抽奖dee描述',
+        start_time: new Date('2020.11.10 00:00:00 GMT+08:00').getTime(),
+        end_time: new Date('2020.11.11 23:59:00 GMT+08:00').getTime(),
+        prize: [
+          {
+            name: '吃饭222233334',
+            rate: 0.4,
+            quantity: 40,
+          },
+          // {
+          //   name: '睡觉22222',
+          //   rate: 0.6,
+          //   quantity: 60,
+          // },
+        ],
+      }
+
+      axios({
+        url: 'http://localhost:9898/event/update',
+        method: 'PUT',
+        data: { doc_id: 6, config },
+      }).then((res) => {
+        console.log(res.data)
+      })
+    }
+  </script>
+</html>

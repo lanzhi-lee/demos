@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Redline Debugger</title>
+    <style>
+      html * {
+        outline: 1px solid red !important;
+      }
+    </style>
+  </head>
+  <body></body>
+</html>
+<script>
+;(() => {
+  const style = `<style>html * { outline: 1px solid red !important; }</style>`
+  const headHTML = document.head.innerHTML
+  const hasStyle = headHTML.startsWith(style)
+  document.head.innerHTML = hasStyle ? headHTML.replace(style, '') : style + headHTML
+})()
+</script>

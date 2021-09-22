@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>demo-mouse</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html,
+        body {
+            height: 100%;
+        }
+
+        .container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 100%;
+            height: 100%;
+            background-color: #000;
+        }
+
+        .bar {
+            background-color: #fff;
+            width: 20px;
+            height: 400px;
+
+            position: absolute;
+
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <span class="bar"></span>
+    </div>
+</body>
+<script>
+    let bar = document.querySelector('.bar')
+
+    bar.addEventListener('mousemove', (event) => {
+
+    })
+
+    document.querySelector('.container').addEventListener('mousemove', (event) => {
+        console.log(event)
+        bar.style.left = `${event.clientX - 10}px`
+    })
+</script>
+
+</html>

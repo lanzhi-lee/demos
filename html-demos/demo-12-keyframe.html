@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>demo-12-keyframe</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html,
+    body {
+      background-color: #000;
+      position: relative;
+      height: 100%;
+    }
+
+    .sequence-container {
+      position: absolute;
+      top: 0;
+      height: 100%;
+      width: 100%;
+    }
+
+    .scroll-sequence {
+      position: absolute;
+      height: 4110vh;
+      width: 100%;
+      top: 0;
+    }
+
+    .image-sequence {
+      position: sticky;
+      top: 0;
+      overflow: hidden;
+    }
+
+    .canvas-container {
+      position: relative;
+      width: 100%;
+      height: calc(100vh - 52px);
+      padding-top: 52px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .canvas-wrapper .wrapper-2 {
+      transition: all 0.3s;
+      will-change: transform;
+    }
+
+    span.note {
+      color: #fff;
+      font-size: 24px;
+      text-align: center;
+      display: block;
+      width: 100%;
+      margin-top: 24px;
+    }
+  </style>
+</head>
+
+<body>
+  <style>
+    .div1 {
+      width: 100%;
+      height: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+  </style>
+
+  <!-- <div class="div1">
+    <canvas id="02-head-bob-turn" width="1458" height="820"></canvas>
+    <span class="note">Scroll Down or up</span>
+  </div> -->
+
+  <div class="scroll-sequence">
+    <div class="sequence-container">
+      <div class="image-sequence">
+        <div class="canvas-container">
+          <div class="canvas-wrapper wrapper-2" style="width: 1458px; height: 820px; z-index: 9; opacity: 1;">
+            <canvas id="02-head-bob-turn" width="1458" height="820"></canvas>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <span class="note">Scroll Down or up</span>
+
+</body>
+
+<script>
+  // const srcDir = 'https://www.apple.com/105/media/us/airpods-pro/2019/1299e2f5_9206_4470_b28e_08307a42f19b/anim/sequence/large/02-head-bob-turn/';
+  const srcDir = './imgs/demo-12/';
+  const imgSuffix = '.jpg';
+
+  console.log('Hello AirPods-Pro!');
+
+  var appleAirPodsPro = {
+    init() {
+      this.initData();
+      this.initImages();
+      this.handleResize();
+      this.bindEvents();
+    },
+
+    initData() {
+      this.canvas = document.getElementById('02-head-bob-turn');
+      this.context = this.canvas.getContext('2d');
+      this.MAX_LEN = 132;
+      this.imgs = [];
+      this.start = 1;
+      this.oldStart = -1;
+      this.addN = 1;
+      this.interval = 20; // 控制刷新率
+      this.leftY = 0;
+      this.curScrollY = this.getScrollTop();
+      this.startPosition = this.curScrollY;
+      this.lastPosition = this.curScrollY;
+      this.isStop = false;
+    },
+
+    initImages() {
+      for (let index = 0; index < this.MAX_LEN; index++) {
+        const img = new Image();
+        img.src = this.getImageUrl(index);
+        // 不管加载否 保证顺序
+        this.imgs.push(img);
+      }
+    },
+
+    handleResize() {
+      const wScale = window.innerWidth / (this.canvas.width || 1458);
+      const hScale = (window.innerHeight - 52) / (this.canvas.height || 1458);
+
+      this.canvas.style.transform = `matrix(${wScale}, 0, 0, ${hScale}, 0, 0)`;
+    },
+
+    bindEvents() {
+      window.addEventListener('resize', () => this.handleResize());
+      window.addEventListener('scroll', () => this.handleScroll());
+    },
+
+    getScrollTop() {
+      return window.scrollY || 0;
+    },
+
+    getImageUrl(num) {
+      return `${srcDir}${(`${num}`).padStart(4, '0')}${imgSuffix}`
+    },
+
+    isOver() {
+      return this.start < 0 || this.start > this.MAX_LEN - 1;
+    },
+
+    handleScroll() {
+      const scrollY = this.getScrollTop();
+
+      // delta 变化值
+      let delta = scrollY - this.curScrollY;
+
+      // 是否正在下滑
+      const isDown = delta > 0;
+
+      // todo 不理解
+      delta = Math.abs(delta) + this.leftY;
+
+      // 更新 curScrollY
+      this.curScrollY = scrollY;
+
+      // 
+      if (this.isStop && isDown === this.needDown &&
+        ((isDown && this.curScrollY > this.lastPosition) || (!isDown && this.curScrollY < this.lastPosition))) {
+        this.isStop = false;
+      }
+
+      if (this.isStop) return;
+
+      console.log("delta", delta)
+      // good idea: 补偿
+      const alpha = Math.floor(delta / this.interval) * this.addN || 0;
+      this.leftY = delta % this.interval;
+      console.log(alpha)
+
+      isDown ? (this.start += alpha) : (this.start -= alpha);
+
+      if (this.isOver() && !this.isStop) {
+        this.isStop = true;
+        // console.log(this.start, scrollY, this.lastPosition);
+
+        // TODO: 多个 canvas 用 opacity 切换
+        // this.canvas.style.cssText = `opacity: 0;`
+      }
+
+      if (this.start < 0) this.start = 0;
+      if (this.start > this.MAX_LEN - 1) this.start = this.MAX_LEN - 1;
+      if (this.startPosition >= scrollY) this.start = 0;
+      if (this.oldStart === this.start) return;
+      this.oldStart = this.start;
+
+      // good idea：记录
+      this.lastPosition = scrollY;
+      this.needDown = !isDown;
+
+      this.drawCanvas(this.start);
+    },
+
+    drawCanvas(sequence) {
+      // 当前序列帧
+      const imgTemp = this.imgs[sequence];
+
+      this.canvas.width = imgTemp.width;
+      this.canvas.height = imgTemp.height;
+      this.context.drawImage(imgTemp, 0, 0);
+    },
+  };
+
+  appleAirPodsPro.init();
+</script>
+
+</html>

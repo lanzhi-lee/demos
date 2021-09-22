@@ -1,0 +1,759 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link href="//i01.appmifile.com/webfile/globalimg/favicon.ico" rel="shortcut icon" type="image/x-icon" />
+    <title>Error Chart</title>
+    <style>
+      html,
+      body,
+      #container {
+        margin: 0;
+        padding: 0;
+        width: 100%;
+        height: 100%;
+      }
+      #container {
+        box-sizing: border-box;
+        padding: 20px;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="container"></div>
+  </body>
+  <script src="https://cdn.jsdelivr.net/npm/echarts@5.1.2/dist/echarts.min.js"></script>
+  <script>
+    const _7_4 = {
+      sg: {
+        staticJsP0: 13130,
+        staticCssP0: 648,
+        syntaxErrorP1: 1981,
+        codeErrorP1: 3992,
+        staticImgP2: 0,
+        staticVideoP2: 0,
+        staticAudioP2: 0,
+        promiseErrorP2: 1324,
+      },
+      ru: {
+        staticJsP0: 488,
+        staticCssP0: 29,
+        syntaxErrorP1: 156,
+        codeErrorP1: 763,
+        staticImgP2: 0,
+        staticVideoP2: 0,
+        staticAudioP2: 0,
+        promiseErrorP2: 2,
+      },
+      in: {
+        staticJsP0: 56781,
+        staticCssP0: 8345,
+        syntaxErrorP1: 35204,
+        codeErrorP1: 7445,
+        staticImgP2: 0,
+        staticVideoP2: 0,
+        staticAudioP2: 0,
+        promiseErrorP2: 7192,
+      },
+    }
+
+    // const sg = Mock.mock({
+    //   'staticJsP0|10000-15000': 1,
+    //   'staticCssP0|300-800': 1,
+    //   'syntaxErrorP1|1500-3000': 1,
+    //   'codeErrorP1|2000-6000': 1,
+    //   'staticImgP2|0': 0,
+    //   'staticVideoP2|0': 0,
+    //   'staticAudioP2|0': 0,
+    //   'promiseErrorP2|1000-2000': 1,
+    // })
+    // const ru = Mock.mock({
+    //   'staticJsP0|400-900': 1,
+    //   'staticCssP0|10-120': 1,
+    //   'syntaxErrorP1|50-200': 1,
+    //   'codeErrorP1|300-900': 1,
+    //   'staticImgP2|0-0': 0,
+    //   'staticVideoP2|0-0': 0,
+    //   'staticAudioP2|0-0': 0,
+    //   'promiseErrorP2|0-10': 1,
+    // })
+    // const india = Mock.mock({
+    //   'staticJsP0|40000-60000': 1,
+    //   'staticCssP0|5000-12000': 648,
+    //   'syntaxErrorP1|25000-40000': 1981,
+    //   'codeErrorP1|5000-10000': 3992,
+    //   'staticImgP2|0': 0,
+    //   'staticVideoP2|0': 0,
+    //   'staticAudioP2|0': 0,
+    //   'promiseErrorP2|5000-10000': 1324,
+    // })
+    // function getData() {
+    //   return {
+    //     sg: Mock.mock({
+    //       'staticJsP0|10000-15000': 1,
+    //       'staticCssP0|300-800': 1,
+    //       'syntaxErrorP1|1500-3000': 1,
+    //       'codeErrorP1|2000-6000': 1,
+    //       'staticImgP2|0': 0,
+    //       'staticVideoP2|0': 0,
+    //       'staticAudioP2|0': 0,
+    //       'promiseErrorP2|1000-2000': 1,
+    //     }),
+    //     ru: Mock.mock({
+    //       'staticJsP0|400-900': 1,
+    //       'staticCssP0|10-120': 1,
+    //       'syntaxErrorP1|50-200': 1,
+    //       'codeErrorP1|300-900': 1,
+    //       'staticImgP2|0-0': 0,
+    //       'staticVideoP2|0-0': 0,
+    //       'staticAudioP2|0-0': 0,
+    //       'promiseErrorP2|0-10': 1,
+    //     }),
+    //     in: Mock.mock({
+    //       'staticJsP0|40000-60000': 1,
+    //       'staticCssP0|5000-12000': 648,
+    //       'syntaxErrorP1|25000-40000': 1981,
+    //       'codeErrorP1|5000-10000': 3992,
+    //       'staticImgP2|0': 0,
+    //       'staticVideoP2|0': 0,
+    //       'staticAudioP2|0': 0,
+    //       'promiseErrorP2|5000-10000': 1324,
+    //     }),
+    //   }
+    // }
+    const data = [
+      {
+        date: '7.1',
+        data: {
+          sg: {
+            staticJsP0: 10072,
+            staticCssP0: 696,
+            syntaxErrorP1: 1619,
+            codeErrorP1: 4256,
+            staticImgP2: 0,
+            staticVideoP2: 0,
+            staticAudioP2: 0,
+            promiseErrorP2: 1125,
+          },
+          ru: {
+            staticJsP0: 631,
+            staticCssP0: 99,
+            syntaxErrorP1: 140,
+            codeErrorP1: 621,
+            staticImgP2: 0,
+            staticVideoP2: 0,
+            staticAudioP2: 0,
+            promiseErrorP2: 2,
+          },
+          in: {
+            staticJsP0: 50420,
+            staticCssP0: 9391,
+            syntaxErrorP1: 33376,
+            codeErrorP1: 9274,
+            staticImgP2: 0,
+            staticVideoP2: 0,
+            staticAudioP2: 0,
+            promiseErrorP2: 8982,
+          },
+        },
+      },
+      {
+        date: '7.2',
+        data: {
+          sg: {
+            staticJsP0: 14264,
+            staticCssP0: 551,
+            syntaxErrorP1: 2593,
+            codeErrorP1: 3064,
+            staticImgP2: 0,
+            staticVideoP2: 0,
+            staticAudioP2: 0,
+            promiseErrorP2: 1982,
+          },
+          ru: {
+            staticJsP0: 518,
+            staticCssP0: 85,
+            syntaxErrorP1: 89,
+            codeErrorP1: 391,
+            staticImgP2: 0,
+            staticVideoP2: 0,
+            staticAudioP2: 0,
+            promiseErrorP2: 5,
+          },
+          in: {
+            staticJsP0: 58194,
+            staticCssP0: 8168,
+            syntaxErrorP1: 32482,
+            codeErrorP1: 7614,
+            staticImgP2: 0,
+            staticVideoP2: 0,
+            staticAudioP2: 0,
+            promiseErrorP2: 7432,
+          },
+        },
+      },
+      {
+        date: '7.3',
+        data: {
+          sg: {
+            staticJsP0: 12343,
+            staticCssP0: 454,
+            syntaxErrorP1: 1922,
+            codeErrorP1: 3905,
+            staticImgP2: 0,
+            staticVideoP2: 0,
+            staticAudioP2: 0,
+            promiseErrorP2: 1397,
+          },
+          ru: {
+            staticJsP0: 549,
+            staticCssP0: 26,
+            syntaxErrorP1: 149,
+            codeErrorP1: 693,
+            staticImgP2: 0,
+            staticVideoP2: 0,
+            staticAudioP2: 0,
+            promiseErrorP2: 8,
+          },
+          in: {
+            staticJsP0: 44317,
+            staticCssP0: 8172,
+            syntaxErrorP1: 31079,
+            codeErrorP1: 5731,
+            staticImgP2: 0,
+            staticVideoP2: 0,
+            staticAudioP2: 0,
+            promiseErrorP2: 5071,
+          },
+        },
+      },
+      {
+        date: '7.4',
+        data: {
+          sg: {
+            staticJsP0: 13860,
+            staticCssP0: 543,
+            syntaxErrorP1: 1745,
+            codeErrorP1: 5876,
+            staticImgP2: 0,
+            staticVideoP2: 0,
+            staticAudioP2: 0,
+            promiseErrorP2: 1785,
+          },
+          ru: {
+            staticJsP0: 402,
+            staticCssP0: 43,
+            syntaxErrorP1: 150,
+            codeErrorP1: 474,
+            staticImgP2: 0,
+            staticVideoP2: 0,
+            staticAudioP2: 0,
+            promiseErrorP2: 1,
+          },
+          in: {
+            staticJsP0: 41751,
+            staticCssP0: 7189,
+            syntaxErrorP1: 38682,
+            codeErrorP1: 8020,
+            staticImgP2: 0,
+            staticVideoP2: 0,
+            staticAudioP2: 0,
+            promiseErrorP2: 5548,
+          },
+        },
+      },
+      {
+        date: '7.5',
+        data: {
+          sg: {
+            staticJsP0: 12945,
+            staticCssP0: 413,
+            syntaxErrorP1: 1680,
+            codeErrorP1: 5709,
+            staticImgP2: 0,
+            staticVideoP2: 0,
+            staticAudioP2: 0,
+            promiseErrorP2: 1647,
+          },
+          ru: {
+            staticJsP0: 561,
+            staticCssP0: 98,
+            syntaxErrorP1: 131,
+            codeErrorP1: 527,
+            staticImgP2: 0,
+            staticVideoP2: 0,
+            staticAudioP2: 0,
+            promiseErrorP2: 10,
+          },
+          in: {
+            staticJsP0: 40164,
+            staticCssP0: 9980,
+            syntaxErrorP1: 38598,
+            codeErrorP1: 8277,
+            staticImgP2: 0,
+            staticVideoP2: 0,
+            staticAudioP2: 0,
+            promiseErrorP2: 6165,
+          },
+        },
+      },
+      {
+        date: '7.6',
+        data: {
+          sg: {
+            staticJsP0: 14515,
+            staticCssP0: 707,
+            syntaxErrorP1: 2249,
+            codeErrorP1: 4912,
+            staticImgP2: 0,
+            staticVideoP2: 0,
+            staticAudioP2: 0,
+            promiseErrorP2: 1037,
+          },
+          ru: {
+            staticJsP0: 729,
+            staticCssP0: 115,
+            syntaxErrorP1: 181,
+            codeErrorP1: 768,
+            staticImgP2: 0,
+            staticVideoP2: 0,
+            staticAudioP2: 0,
+            promiseErrorP2: 7,
+          },
+          in: {
+            staticJsP0: 46073,
+            staticCssP0: 11346,
+            syntaxErrorP1: 27461,
+            codeErrorP1: 5570,
+            staticImgP2: 0,
+            staticVideoP2: 0,
+            staticAudioP2: 0,
+            promiseErrorP2: 7236,
+          },
+        },
+      },
+      {
+        date: '7.7',
+        data: {
+          sg: {
+            staticJsP0: 13668,
+            staticCssP0: 627,
+            syntaxErrorP1: 2356,
+            codeErrorP1: 4889,
+            staticImgP2: 0,
+            staticVideoP2: 0,
+            staticAudioP2: 0,
+            promiseErrorP2: 1036,
+          },
+          ru: {
+            staticJsP0: 885,
+            staticCssP0: 79,
+            syntaxErrorP1: 57,
+            codeErrorP1: 352,
+            staticImgP2: 0,
+            staticVideoP2: 0,
+            staticAudioP2: 0,
+            promiseErrorP2: 5,
+          },
+          in: {
+            staticJsP0: 51865,
+            staticCssP0: 6485,
+            syntaxErrorP1: 39803,
+            codeErrorP1: 9674,
+            staticImgP2: 0,
+            staticVideoP2: 0,
+            staticAudioP2: 0,
+            promiseErrorP2: 7250,
+          },
+        },
+      },
+      {
+        date: '7.8',
+        data: {
+          sg: {
+            staticJsP0: 11278,
+            staticCssP0: 638,
+            syntaxErrorP1: 2793,
+            codeErrorP1: 2264,
+            staticImgP2: 0,
+            staticVideoP2: 0,
+            staticAudioP2: 0,
+            promiseErrorP2: 1389,
+          },
+          ru: {
+            staticJsP0: 816,
+            staticCssP0: 90,
+            syntaxErrorP1: 123,
+            codeErrorP1: 655,
+            staticImgP2: 0,
+            staticVideoP2: 0,
+            staticAudioP2: 0,
+            promiseErrorP2: 6,
+          },
+          in: {
+            staticJsP0: 42351,
+            staticCssP0: 7552,
+            syntaxErrorP1: 35575,
+            codeErrorP1: 5656,
+            staticImgP2: 0,
+            staticVideoP2: 0,
+            staticAudioP2: 0,
+            promiseErrorP2: 7321,
+          },
+        },
+      },
+      {
+        date: '7.9',
+        data: {
+          sg: {
+            staticJsP0: 14258,
+            staticCssP0: 414,
+            syntaxErrorP1: 2843,
+            codeErrorP1: 2264,
+            staticImgP2: 0,
+            staticVideoP2: 0,
+            staticAudioP2: 0,
+            promiseErrorP2: 1858,
+          },
+          ru: {
+            staticJsP0: 860,
+            staticCssP0: 63,
+            syntaxErrorP1: 193,
+            codeErrorP1: 542,
+            staticImgP2: 0,
+            staticVideoP2: 0,
+            staticAudioP2: 0,
+            promiseErrorP2: 0,
+          },
+          in: {
+            staticJsP0: 51218,
+            staticCssP0: 11104,
+            syntaxErrorP1: 39159,
+            codeErrorP1: 6238,
+            staticImgP2: 0,
+            staticVideoP2: 0,
+            staticAudioP2: 0,
+            promiseErrorP2: 6837,
+          },
+        },
+      },
+      {
+        date: '7.10',
+        data: {
+          sg: {
+            staticJsP0: 11156,
+            staticCssP0: 722,
+            syntaxErrorP1: 1986,
+            codeErrorP1: 4129,
+            staticImgP2: 0,
+            staticVideoP2: 0,
+            staticAudioP2: 0,
+            promiseErrorP2: 1788,
+          },
+          ru: {
+            staticJsP0: 826,
+            staticCssP0: 29,
+            syntaxErrorP1: 55,
+            codeErrorP1: 783,
+            staticImgP2: 0,
+            staticVideoP2: 0,
+            staticAudioP2: 0,
+            promiseErrorP2: 7,
+          },
+          in: {
+            staticJsP0: 54339,
+            staticCssP0: 10716,
+            syntaxErrorP1: 39413,
+            codeErrorP1: 6135,
+            staticImgP2: 0,
+            staticVideoP2: 0,
+            staticAudioP2: 0,
+            promiseErrorP2: 8727,
+          },
+        },
+      },
+      {
+        date: '7.11',
+        data: {
+          sg: {
+            staticJsP0: 11965,
+            staticCssP0: 678,
+            syntaxErrorP1: 2623,
+            codeErrorP1: 5710,
+            staticImgP2: 0,
+            staticVideoP2: 0,
+            staticAudioP2: 0,
+            promiseErrorP2: 1488,
+          },
+          ru: {
+            staticJsP0: 495,
+            staticCssP0: 26,
+            syntaxErrorP1: 111,
+            codeErrorP1: 792,
+            staticImgP2: 0,
+            staticVideoP2: 0,
+            staticAudioP2: 0,
+            promiseErrorP2: 9,
+          },
+          in: {
+            staticJsP0: 53138,
+            staticCssP0: 5906,
+            syntaxErrorP1: 25721,
+            codeErrorP1: 9413,
+            staticImgP2: 0,
+            staticVideoP2: 0,
+            staticAudioP2: 0,
+            promiseErrorP2: 8153,
+          },
+        },
+      },
+      {
+        date: '7.12',
+        data: {
+          sg: {
+            staticJsP0: 12987,
+            staticCssP0: 550,
+            syntaxErrorP1: 2658,
+            codeErrorP1: 3953,
+            staticImgP2: 0,
+            staticVideoP2: 0,
+            staticAudioP2: 0,
+            promiseErrorP2: 1103,
+          },
+          ru: {
+            staticJsP0: 631,
+            staticCssP0: 58,
+            syntaxErrorP1: 89,
+            codeErrorP1: 400,
+            staticImgP2: 0,
+            staticVideoP2: 0,
+            staticAudioP2: 0,
+            promiseErrorP2: 10,
+          },
+          in: {
+            staticJsP0: 40049,
+            staticCssP0: 6352,
+            syntaxErrorP1: 27798,
+            codeErrorP1: 5769,
+            staticImgP2: 0,
+            staticVideoP2: 0,
+            staticAudioP2: 0,
+            promiseErrorP2: 9343,
+          },
+        },
+      },
+      {
+        date: '7.13',
+        data: {
+          sg: {
+            staticJsP0: 11079,
+            staticCssP0: 558,
+            syntaxErrorP1: 1675,
+            codeErrorP1: 5680,
+            staticImgP2: 0,
+            staticVideoP2: 0,
+            staticAudioP2: 0,
+            promiseErrorP2: 1274,
+          },
+          ru: {
+            staticJsP0: 804,
+            staticCssP0: 16,
+            syntaxErrorP1: 75,
+            codeErrorP1: 577,
+            staticImgP2: 0,
+            staticVideoP2: 0,
+            staticAudioP2: 0,
+            promiseErrorP2: 5,
+          },
+          in: {
+            staticJsP0: 53007,
+            staticCssP0: 7439,
+            syntaxErrorP1: 39287,
+            codeErrorP1: 9207,
+            staticImgP2: 0,
+            staticVideoP2: 0,
+            staticAudioP2: 0,
+            promiseErrorP2: 9185,
+          },
+        },
+      },
+      {
+        date: '7.14',
+        data: {
+          sg: {
+            staticJsP0: 10251,
+            staticCssP0: 630,
+            syntaxErrorP1: 2402,
+            codeErrorP1: 5794,
+            staticImgP2: 0,
+            staticVideoP2: 0,
+            staticAudioP2: 0,
+            promiseErrorP2: 1797,
+          },
+          ru: {
+            staticJsP0: 451,
+            staticCssP0: 78,
+            syntaxErrorP1: 135,
+            codeErrorP1: 891,
+            staticImgP2: 0,
+            staticVideoP2: 0,
+            staticAudioP2: 0,
+            promiseErrorP2: 4,
+          },
+          in: {
+            staticJsP0: 59778,
+            staticCssP0: 10723,
+            syntaxErrorP1: 38782,
+            codeErrorP1: 7611,
+            staticImgP2: 0,
+            staticVideoP2: 0,
+            staticAudioP2: 0,
+            promiseErrorP2: 5291,
+          },
+        },
+      },
+    ]
+  </script>
+  <script>
+    // 基于准备好的dom，初始化echarts实例
+    const mainChart = echarts.init(document.getElementById('container'))
+
+    const _data = data.reduce(
+      (acc, single) => {
+        acc.date.push(single.date)
+        acc.sg.push(single.data.sg)
+        acc.ru.push(single.data.ru)
+        acc.in.push(single.data.in)
+
+        return acc
+      },
+      { date: [], sg: [], ru: [], in: [] }
+    )
+
+    console.log(_data)
+    // 指定图表的配置项和数据
+    const option = {
+      title: {
+        text: '错误监控平台数据变化趋势',
+        textStyle: {
+          fontSize: 24,
+        },
+      },
+      grid: {
+        top: 80,
+      },
+      tooltip: {},
+      legend: [
+        {
+          top: 0,
+          right: 0,
+          data: ['新加坡机房', '俄罗斯机房', '印度机房'],
+        },
+        {
+          orient: 'vertical',
+          // right: '20px',
+          top: 60,
+          right: 0,
+          data: [
+            'staticJsP0',
+            'staticCssP0',
+            'syntaxErrorP1',
+            'codeErrorP1',
+            'staticImgP2',
+            'staticVideoP2',
+            'staticAudioP2',
+            'promiseErrorP2',
+          ],
+        },
+      ],
+      xAxis: {
+        // data: ['衬衫', '羊毛衫', '雪纺衫', '裤子', '高跟鞋', '袜子'],
+        // data: Object.keys(data),
+        data: _data.date,
+      },
+      yAxis: {},
+      dataZoom: [
+        {
+          type: 'slider',
+          show: true,
+          xAxisIndex: [0],
+          // start: 1,
+          // end: 35,
+        },
+      ],
+      series: [
+        {
+          name: '新加坡机房',
+          type: 'line',
+          data: _data.sg.map((data) => data.staticJsP0),
+          smooth: true,
+        },
+        {
+          name: '俄罗斯机房',
+          type: 'line',
+          data: _data.ru.map((data) => data.staticJsP0),
+          smooth: true,
+        },
+        {
+          name: '印度机房',
+          type: 'line',
+          data: _data.in.map((data) => data.staticJsP0),
+          smooth: true,
+        },
+        {
+          name: 'staticJsP0',
+          type: 'line',
+          data: _data.in.map((data) => data.staticJsP0),
+          smooth: true,
+        },
+        {
+          name: 'staticCssP0',
+          type: 'line',
+          data: _data.in.map((data) => data.staticCssP0),
+          smooth: true,
+        },
+        {
+          name: 'syntaxErrorP1',
+          type: 'line',
+          data: _data.in.map((data) => data.syntaxErrorP1),
+          smooth: true,
+        },
+        {
+          name: 'codeErrorP1',
+          type: 'line',
+          data: _data.in.map((data) => data.codeErrorP1),
+          smooth: true,
+        },
+        {
+          name: 'staticImgP2',
+          type: 'line',
+          data: _data.in.map((data) => data.staticImgP2),
+          smooth: true,
+        },
+        {
+          name: 'staticVideoP2',
+          type: 'line',
+          data: _data.in.map((data) => data.staticVideoP2),
+          smooth: true,
+        },
+        {
+          name: 'staticAudioP2',
+          type: 'line',
+          data: _data.in.map((data) => data.staticAudioP2),
+          smooth: true,
+        },
+        {
+          name: 'promiseErrorP2',
+          type: 'line',
+          data: _data.in.map((data) => data.promiseErrorP2),
+          smooth: true,
+        },
+      ],
+    }
+
+    // 使用刚指定的配置项和数据显示图表。
+    mainChart.setOption(option)
+  </script>
+</html>

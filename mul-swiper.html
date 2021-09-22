@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>mul-swiper</title>
+    <link rel="stylesheet" href="https://i01.appmifile.com/webfile/globalweb/swiper/swiper.css" />
+    <style>
+      .swiper-container {
+        width: 600px;
+        height: 300px;
+      }
+
+      .swiper-slide {
+        background-color: pink;
+        color: #000;
+        font-weight: bold;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+      .animation {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 100px;
+        height: 100px;
+        background-color: #fff;
+        transition: 0.3s;
+      }
+      .do-animation {
+        animation: rotate 5s;
+        animation-iteration-count: infinite;
+        animation-timing-function: linear;
+        /* animation-play-state: paused; */
+      }
+
+      @keyframes rotate {
+        from {
+          transform: rotate(0deg);
+        }
+        to {
+          transform: rotate(360deg);
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="swiper-container">
+      <div class="swiper-wrapper">
+        <div class="swiper-slide">
+          <div class="animation">1</div>
+        </div>
+        <div class="swiper-slide">
+          <div class="animation">2</div>
+        </div>
+        <div class="swiper-slide">
+          <div class="animation">3</div>
+        </div>
+      </div>
+    </div>
+    <p>================</p>
+    <div class="swiper-container">
+      <div class="swiper-wrapper">
+        <div class="swiper-slide">
+          <div class="animation">1</div>
+        </div>
+        <div class="swiper-slide">
+          <div class="animation">2</div>
+        </div>
+        <div class="swiper-slide">
+          <div class="animation">3</div>
+        </div>
+      </div>
+    </div>
+  </body>
+  <script src="https://i01.appmifile.com/webfile/globalweb/swiper/swiper.min.js"></script>
+  <script src="https://cdn.bootcdn.net/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+  <script>
+    function createSwiper(extraClass, delay = 5000, animationClass = 'do-animation') {
+      if (!extraClass) return
+console.log(extraClass)
+      const swiper = new Swiper($(`.${extraClass}`), {
+        direction: 'vertical',
+        loop: true,
+        allowTouchMove: false,
+        autoplay: { delay },
+        on: {
+          init: () => setAnimationClass(true),
+          transitionStart: () => setAnimationClass(false),
+          transitionEnd: () => setAnimationClass(true),
+        },
+      })
+
+      /** @param {boolean} show 真值添加类名，假值移除类名 */
+      function setAnimationClass(show) {
+        const $elem = $(`.${extraClass}`).find('.swiper-slide-active').children().eq(0)
+        show ? $elem.addClass(animationClass) : $elem.removeClass(animationClass)
+      }
+
+      // 鼠标覆盖停止自动切换
+      swiper.el.onmouseover = function () {
+        swiper.autoplay.stop()
+        setAnimationClass(false)
+      }
+
+      //鼠标离开开始自动切换
+      swiper.el.onmouseout = function (event) {
+        swiper.autoplay.start()
+        setAnimationClass(true)
+      }
+
+      return swiper
+    }
+    
+    function getRandomString() {
+      return (Math.random() + '').slice(2, 10)
+    }
+
+    const class1 = getRandomString()
+    $('.swiper-container').eq(0).addClass('swiper-container-' + class1)
+    const class2 = getRandomString()
+    $('.swiper-container').eq(1).addClass('swiper-container-' + class2)
+
+    var mySwiper1 = createSwiper('swiper-container-' + class1, 5000)
+    var mySwiper2 = createSwiper('swiper-container-' + class2, 5000)
+    // var mySwiper2 = createSwiper('container2', 50000)
+
+    // function createSwiper(extraClass, delay = 5000, animationClass = 'do-animation') {
+    //   if (!extraClass) return
+
+    //   const swiper = new window.Swiper(`.${extraClass}`, {
+    //     direction: 'vertical',
+    //     loop: true,
+    //     allowTouchMove: false,
+    //     autoplay: { delay },
+    //     on: {
+    //       init: () => setAnimationClass(true),
+    //       transitionStart: () => setAnimationClass(false),
+    //       transitionEnd: () => setAnimationClass(true),
+    //     },
+    //   })
+
+    //   /** @param {boolean} show 真值添加类名，假值移除类名 */
+    //   function setAnimationClass(show) {
+    //     const $elem = $(`.${extraClass}`).find('.swiper-slide-active').children().eq(0)
+    //     show ? $elem.addClass(animationClass) : $elem.removeClass(animationClass)
+    //   }
+
+    //   // 鼠标覆盖停止自动切换
+    //   swiper.el.onmouseover = function () {
+    //     swiper.autoplay.stop()
+    //     setAnimationClass(false)
+    //   }
+
+    //   //鼠标离开开始自动切换
+    //   swiper.el.onmouseout = function (event) {
+    //     swiper.autoplay.start()
+    //     setAnimationClass(true)
+    //   }
+
+    //   return swiper
+    // }
+  </script>
+</html>

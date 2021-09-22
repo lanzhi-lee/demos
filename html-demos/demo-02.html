@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>点击按钮 复制文本</title>
+    <style type="text/css">
+        .wrapper {
+            position: relative;
+        }
+
+        #input {
+            position: absolute;
+            top: 0;
+            left: 0;
+            opacity: 0;
+            z-index: -10;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="wrapper">
+        <p id="text">我把你当兄弟你却想着复制我？</p>
+        <textarea id="input">这是幕后黑手</textarea>
+        <p onclick="copyText()">copy</p>
+        <button class="test">test</button>
+    </div>
+</body>
+
+<script type="text/javascript">
+    function copyText() {
+        var text = document.getElementById("text").innerText;
+        var input = document.getElementById("input");
+        input.value = text; // 修改文本框的内容
+        input.select(); // 选中文本
+        document.execCommand("copy"); // 执行浏览器复制命令
+        alert("复制成功");
+    }
+
+    let btn = document.querySelector('.test')
+    btn.addEventListener('click', () => {
+        let textarea = document.createElement('textarea')
+        textarea.setAttribute('value', 'hahahaha')
+        textarea.select()
+        document.execCommand('copy')
+        alert('copy hahaha')
+    })
+</script>
+
+</html>
+
+<!-- 
+    手机端不使用input，textarea，避免浏览器错误地提示安全信息
+
+ -->

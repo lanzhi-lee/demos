@@ -1,0 +1,135 @@
+<!-- 实现一个拖动滑块显示图片的效果 -->
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>demo-01</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html,
+        body {
+            height: 100%;
+        }
+
+        .container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            /* width: 100%; */
+            width: 3000px;
+            height: 100%;
+
+            background-color: #000;
+        }
+
+        .bg-img,
+        .move-img {
+            display: inline-block;
+            width: 800px;
+            height: 411px;
+            background-size: 800px 411px;
+            background-repeat: no-repeat;
+        }
+
+        .bg-img {
+            background-image: url('http://i1.mifile.cn/f/i/2019/micc9/summary/ps-2.jpg');
+            overflow: hidden;
+        }
+
+        .move-img {
+            width: 400px;
+            background-image: url('http://i1.mifile.cn/f/i/2019/micc9/summary/ps-20.jpg');
+        }
+
+        .bar {
+            display: flex;
+
+            height: 411px;
+            width: 2px;
+            background-color: #fff;
+
+            cursor: move;
+
+            position: relative;
+            left: 400px;
+        }
+
+        .bar:after {
+            content: " ";
+            display: block;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+
+            position: absolute;
+            top: 50%;
+            left: 50%;
+
+            margin-left: -20px;
+            margin-top: -20px;
+
+            background: url(http://i1.mifile.cn/f/i/2019/mitvall-screen/e65a/vs-4k-btn.png) no-repeat;
+            background-size: cover;
+        }
+    </style>
+
+</head>
+<script src="https://cdn.bootcss.com/jquery/3.4.1/jquery.min.js"></script>
+
+<body>
+    <div class="container">
+        <div class="bg-img">
+            <div class="move-img">
+                <span>
+                    <span class="bar"></span>
+                </span>
+            </div>
+        </div>
+    </div>
+</body>
+
+<script>
+    'use strict'
+    let bar = document.querySelector('.bar')
+    let bg_img = document.querySelector('.bg-img')
+    let move_img = document.querySelector('.move-img')
+
+    let foo = (event) => {
+        let clientX = event.pageX
+        let offsetLeft = bg_img.offsetLeft
+
+        let offset = clientX - offsetLeft - 1
+
+        if (offset < -1 || offset > 800) return
+
+        move_img.style.width = `${offset}px`
+        bar.style.left = `${offset}px`
+    }
+
+    // 鼠标点击滑动条是开启监听
+    bar.addEventListener('mousedown', () => {
+        // 滑动条跟随鼠标拖动
+        bg_img.addEventListener('mousemove', foo)
+    })
+
+    // 鼠标松开移除监听
+    bar.addEventListener('mouseup', () => {
+        bg_img.removeEventListener('mousemove', foo, false)
+    })
+
+    // 鼠标移出图片区域移出监听
+    bg_img.addEventListener('mouseleave', () => {
+        bg_img.removeEventListener('mousemove', foo, false)
+    })
+</script>
+
+</html>

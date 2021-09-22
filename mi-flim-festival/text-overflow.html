@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      .txt-box {
+        width: 200px;
+        height: 78px; /*高度固定*/
+        overflow: hidden;
+        text-overflow: ellipsis;
+        display: -webkit-box;
+        -webkit-line-clamp: 3; /*三行省略*/
+        -webkit-box-orient: vertical;
+        font-size: 14px;
+        color: #545c63;
+        line-height: 28px;
+        transition: all 5s;
+      }
+      .txt-box:hover {
+        background: #fff;
+        height: auto; /*设置一个最小高度，实际高度自动*/
+        min-height: 78px;
+        position: relative;
+        z-index: 5;
+        padding: 10px;
+        margin-top: -10px;
+        margin-left: -10px;
+        border-radius: 8px;
+        /* box-shadow: 0 8px 16px 0 rgba(7, 17, 27, 0.2); 加阴影 */
+        -webkit-line-clamp: inherit; /*去掉省略*/
+      }
+    </style>
+  </head>
+  <body>
+    <div class="txt-box">
+      鼠标移上去鼠标移上去鼠标移上去鼠标移上去鼠标移 上去鼠标移上去鼠标移上去鼠标移上去鼠标移上去鼠
+      标移上去鼠标移上去鼠标移上去鼠标移上去鼠标移上
+    </div>
+  </body>
+</html>

@@ -1,0 +1,153 @@
+<!doctype html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <title>萤火虫上升效果</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            text-align: center;
+            background-color: #000;
+        }
+
+        #snow {
+            position: absolute;
+            top: 0;
+            left: 0;
+            pointer-events: none;
+            /* 可穿透上层元素点击操作下层内容 */
+            z-index: 999;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <canvas id="snow"></canvas>
+    </div>
+    <script>
+        function getRandom(min, max) {
+            return Math.random() * (max - min) + min
+        }
+
+        //加载判断
+        function ready(fn) {
+            if (document.readyState != 'loading') {
+                fn();
+            } else {
+                document.addEventListener('DOMContentLoaded', fn);
+            }
+        }
+
+        function makeSnow(el) {
+            var ctx = el.getContext('2d');
+            var width = 0;
+            var height = 0;
+            var particles = [];
+
+            // const SNOW_COUNT = (width * height) / 3000
+            const SNOW_COUNT = 100
+
+            //重置复位
+            var Particle = function () {
+                this.x = this.y = this.dx = this.dy = 0;
+                this.opacity = 1
+
+                this.reset();
+            }
+
+            //随机位置
+            Particle.prototype.reset = function () {
+                this.y = Math.random() * height;
+                this.x = Math.random() * width;
+                this.dx = (Math.random() * 1) - 0.5;
+                this.dy = (Math.random() * -1) - 1;
+            }
+
+            //将雪花数量 push 到 particles 数组中
+            function createParticles(count) {
+                if (count != particles.length) {
+                    particles = [];
+
+                    for (var i = 0; i < count; i++) {
+                        particles.push(new Particle());
+                    }
+                }
+            }
+
+            //调整 Canvas 大小
+            function onResize() {
+                width = window.innerWidth;
+                height = window.innerHeight;
+                el.width = width;
+                el.height = height;
+                //雪花密集度（雪花数量）
+                // createParticles((width * height) / 3000);
+                createParticles(SNOW_COUNT);
+            }
+
+            //重复更新绘制 Canvas
+            function updateParticles() {
+                ctx.clearRect(0, 0, width, height); //清空矩形
+                // ctx.fillStyle = '#f6f9fa'; //填充颜色
+                // ctx.fillStyle = 'yellow'; //填充颜色
+
+                particles.forEach(function (particle) {
+                    particle.y += particle.dy;
+                    particle.x += particle.dx;
+
+                    particle.opacity = (particle.opacity + getRandom(0.005, 0.009)) % 1
+
+                    // console.log(particle.opacity)
+
+                    // if (particle.opacity < 0) {
+                    //     particle.opacity = 1
+                    // }
+
+                    //当雪花超出屏幕可视区（x,y）最大值时，将重置复位
+                    if (particle.y < 0) {
+                        particle.reset();
+                        // particle.y = height;
+                    }
+
+                    if (particle.x > width) {
+                        particle.reset();
+                        // particle.y = height;
+                    }
+
+                    ctx.fillStyle = `rgba(255, 255, 0, ${particle.opacity})`; //填充颜色
+
+                    ctx.beginPath();
+                    //绘制圆（雪花位置与大小）
+                    ctx.arc(particle.x, particle.y, 2, 0, Math.PI * 2, false);
+                    ctx.fill();
+                });
+
+                //绘制动画
+                window.requestAnimationFrame(updateParticles);
+            }
+
+            onResize();
+            updateParticles();
+
+            //监听可视窗口，改变时执行 onResize 函数
+            window.addEventListener('resize', onResize);
+        }
+
+        //加载传参
+        ready(function () {
+            var canvas = document.getElementById('snow');
+            makeSnow(canvas);
+        });
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+    }
+    body {
+      display: flex;
+      justify-content: center;
+    }
+    .container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-wrap: wrap;
+
+      width: 620px;
+      background-color: deeppink;
+    }
+    .item {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background-color: pink;
+
+      width: 100px;
+      height: 100px;
+      margin-right: 30px;
+      margin-bottom: 30px;
+    }
+    .item:nth-child(5n) {
+      margin-right: 0;
+    }
+
+    .empty{
+      width: 100px;
+      height: 0;
+    }
+  </style>
+  <body>
+    <div class="container">
+      <span class="item">1</span>
+      <span class="item">2</span>
+      <span class="item">3</span>
+      <span class="item">4</span>
+      <span class="item">5</span>
+      <span class="item">6</span>
+      <span class="item">7</span>
+      <span class="item">8</span>
+      <span class="item">9</span>
+
+      <span class="empty"></span>
+      <span class="empty"></span>
+      <span class="empty"></span>
+      <span class="empty"></span>
+    </div>
+  </body>
+</html>
